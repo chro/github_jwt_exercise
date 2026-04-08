@@ -70,6 +70,12 @@ def verify_token(token):
     else:
         raise ValueError(f"Unsupported algorithm: {alg}")
 
+@app.route("/logout")
+def logout():
+    resp = make_response(redirect("/"))
+    resp.set_cookie("token", "")
+    return resp
+
 
 @app.route("/login", methods=['POST'])
 def login():
